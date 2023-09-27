@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('students', function (Blueprint $table) {
+        Schema::create('instructors', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_user');
-                $table->foreign('id_user')->references('id')->on('users');
             $table->string('first_name');
             $table->string('surname');
             $table->date('date_of_birth');
-            // $table->unsignedBigInteger('id_field_of_study');
-            //     $table->foreign('id_field_of_study')->references('id')->on('field_of_studies');
+            $table->date('hire_date');
+            $table->integer('salary');
+            // $table->unsignedBigInteger('account'); //! Create table with enums(change teacher on instructor)
+            //     $table->foreign('account')->references('id')->on('ac_table');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('students');
+        Schema::dropIfExists('instructors');
     }
 };

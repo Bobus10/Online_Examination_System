@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use App\Models\Student;
 use App\Models\Subject;
+use App\Models\Yearbook;
 use App\Enums\UserRoleEnums;
 use App\Models\FieldOfStudy;
 use Illuminate\Database\Seeder;
@@ -27,10 +28,11 @@ class UserSeeder extends Seeder
         // ];
 
         // User::insert($data);
-
+        // ->for(FieldOfStudy::factory()->has(
+            //     Subject::factory(10)))
         User::factory(10)->has(
-            Student::factory()->for(FieldOfStudy::factory()->has(
-                Subject::factory(10)))
-                )->create();
+            Student::factory())
+            ->create();
+
     }
 }

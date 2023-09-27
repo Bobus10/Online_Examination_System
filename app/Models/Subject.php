@@ -9,7 +9,11 @@ class Subject extends Model
 {
     use HasFactory;
 
-    public function FieldOfStudies() {
+    public function fieldOfStudies() {
         return $this->hasMany(FieldOfStudy::class, 'id_field_of_study');
+    }
+
+    public function classes() {
+        return $this->hasMany(Classes::class, 'id_subject');
     }
 }

@@ -9,11 +9,15 @@ class Student extends Model
 {
     use HasFactory;
 
-    public function User() {
+    public function user() {
         return $this->belongsTo(User::class, 'id_user');
     }
 
-    public function FieldOfStudy() {
-        return $this->belongsTo(FieldOfStudy::class, 'id_field_of_study');
+    // public function FieldOfStudy() {
+    //     return $this->belongsTo(FieldOfStudy::class, 'id_field_of_study');
+    // }
+
+    public function yearbook() {
+        return $this->belongsTo(Yearbook::class, 'id_student');
     }
 }
