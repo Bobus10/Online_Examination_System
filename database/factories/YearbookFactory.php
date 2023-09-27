@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\FieldOfStudy;
+use App\Models\Student;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,9 @@ class YearbookFactory extends Factory
     public function definition(): array
     {
         return [
-            // 'academic_year' => fake()->numberBetween(2020, 2025),
+            'id_student' =>Student::factory(),
+            'id_field_of_study' =>FieldOfStudy::factory(),
+            'academic_year' => fake()->numberBetween(2020, 2025),
         ];
     }
 }

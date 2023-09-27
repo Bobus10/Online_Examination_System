@@ -18,13 +18,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        for($i = 1; $i <= 3; $i++) {
-            $this->call([UserSeeder::class,]);
-        }
+        // for($i = 1; $i <= 3; $i++) {
+        //     $this->call([UserSeeder::class,]);
+        // }
 
-        // Classes::factory(10)->create(
-        //     ['id_student' => 1,]
-        // );
+        Classes::factory(10)->create();
+
         $this->call([
             // UserSeeder::class,
             // InstructorSeeder::class,

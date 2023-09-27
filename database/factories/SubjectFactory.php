@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\FieldOfStudy;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,8 @@ class SubjectFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->text(20)
+            'name' => fake()->text(20),
+            'id_field_of_study' => FieldOfStudy::factory(),
         ];
     }
 }
