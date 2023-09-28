@@ -20,4 +20,8 @@ class Classes extends Model
     public function instructor() {
         return $this->belongsTo(Instructors::class, 'id_instructor');
     }
+
+    public function exams() {
+        return $this->hasMany(Exams::class, 'class_id');
+    }
 }
