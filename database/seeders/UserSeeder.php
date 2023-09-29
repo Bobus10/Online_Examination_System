@@ -20,19 +20,18 @@ class UserSeeder extends Seeder
     public function run(): void
     {
 
-        // $data = [
-        //     'name' => 'Test',
-        //     'email' => 'test@test.com',
-        //     'password' => Hash::make('qwer1234'),
-        //     'role' => UserRoleEnums::STUDENT,
-        // ];
+        $data = [
+            'name' => 'Admin',
+            'email' => 'admin@test.com',
+            'password' => Hash::make('qwer1234'),
+            'role' => UserRoleEnums::ADMIN,
+        ];
 
-        // User::insert($data);
+        User::insert($data);
+
         // ->for(FieldOfStudy::factory()->has(
             //     Subject::factory(10)))
-        User::factory(10)->has(
-            Student::factory())
-            ->create();
+        //User::factory(10)->has(Student::factory())->create();
 
     }
 }

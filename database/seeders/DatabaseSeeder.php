@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
         Answers::factory(10)->create();
 
         $this->call([
-            // UserSeeder::class,
+            UserSeeder::class,
             // InstructorSeeder::class,
         ]);
     }
