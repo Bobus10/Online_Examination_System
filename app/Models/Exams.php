@@ -9,6 +9,10 @@ class Exams extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'pass_rate',
+    ];
+
     public function classes() {
         return $this->belongsToMany(Classes::class, 'class_id');
     }

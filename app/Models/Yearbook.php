@@ -9,6 +9,10 @@ class Yearbook extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'academic_year',
+    ];
+
     public function students() {
         return $this->hasMany(Student::class, 'id_student');
     }
