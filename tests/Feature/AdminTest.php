@@ -2,15 +2,15 @@
 
 namespace Tests\Feature;
 
-use App\Enums\UserRoleEnums;
-use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\User;
+use App\Enums\UserRoleEnums;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class AdminTest extends TestCase
 {
-    //use RefreshDatabase;
+    use RefreshDatabase;
     /**
      * A basic feature test example.
      */

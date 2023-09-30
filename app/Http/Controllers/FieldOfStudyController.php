@@ -12,7 +12,9 @@ class FieldOfStudyController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.fieldOfStudy.index', [
+            'fieldOfStudies' => FieldOfStudy::all(),
+        ]);
     }
 
     /**
