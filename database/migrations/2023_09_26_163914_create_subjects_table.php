@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->unsignedBigInteger('id_field_of_study');
-                $table->foreign('id_field_of_study')->references('id')->on('field_of_studies');
+                $table->foreign('id_field_of_study')->references('id')->on('field_of_studies')->cascadeOnDelete();
             $table->timestamps();
         });
     }

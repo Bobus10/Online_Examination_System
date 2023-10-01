@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_student');
                 $table->foreign('id_student')->references('id')->on('students');
             $table->unsignedBigInteger('id_field_of_study');
-                $table->foreign('id_field_of_study')->references('id')->on('field_of_studies');
+                $table->foreign('id_field_of_study')->references('id')->on('field_of_studies')->cascadeOnDelete();
             $table->unsignedSmallInteger('academic_year');
             $table->timestamps();
         });

@@ -15,9 +15,13 @@
 
         <div class="flex flex-col flex-1 overflow-hidden">
             {{-- Header --}}
-            <x-dashboard.header/>
+            <div>
+                <x-dashboard.header/>
+            </div>
             {{-- Content --}}
-            {{ $slot }}
+            <div class='overflow-auto'>
+                {{ $slot }}
+            </div>
 
         </div>
     </div>

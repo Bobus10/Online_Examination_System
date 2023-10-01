@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('exams', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('class_id');
-                $table->foreign('class_id')->references('id')->on('classes');
+                $table->foreign('class_id')->references('id')->on('classes')->cascadeOnDelete();
             $table->smallInteger('pass_rate')->default(51);
             $table->timestamps();
         });

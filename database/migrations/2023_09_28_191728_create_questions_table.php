@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('exam_id');
-                $table->foreign('exam_id')->references('id')->on('exams');
+                $table->foreign('exam_id')->references('id')->on('exams')->cascadeOnDelete();
             $table->string('question');
             $table->string('img_path')->nullable();
             $table->timestamps();

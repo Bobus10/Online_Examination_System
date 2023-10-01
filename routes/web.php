@@ -28,8 +28,14 @@ Route::middleware('auth')->group(function () {
     Route::middleware('isAdmin')->prefix('/admin')->group(function () {
         Route::prefix('/field_of_studies')->group(function () {
             Route::get('/', [FieldOfStudyController::class, 'index'])->name('fos.index');
+            Route::get('/create', [FieldOfStudyController::class, 'create'])->name('fos.create');
+            Route::post('/', [FieldOfStudyController::class, 'store'])->name('fos.store');
+            Route::get('/show/{id}', [FieldOfStudyController::class, 'show'])->name('fos.show');
+            Route::get('/edit/{id}', [FieldOfStudyController::class, 'edit'])->name('fos.edit');
+            Route::post('/{id}', [FieldOfStudyController::class, 'update'])->name('fos.update');
+            Route::get('/{id}', [FieldOfStudyController::class, 'destroy'])->name('fos.destroy');
         });
-        Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.index');
+        Route::get('/', [AdminController::class, 'index'])->name('admin.index');
     });
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

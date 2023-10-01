@@ -8,11 +8,12 @@ use Illuminate\View\Component;
 
 class tbody extends Component
 {
-    public $content, $propsNames;
-    public function __construct($content, $propsNames)
+    public $content, $propsNames, $route;
+    public function __construct($content, $propsNames, $route)
     {
         $this->content = $content;
         $this->propsNames = $propsNames;
+        $this->route = $route;
     }
 
 

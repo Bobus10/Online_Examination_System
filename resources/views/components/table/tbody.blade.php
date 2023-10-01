@@ -9,9 +9,10 @@
                     {{ $contentEl->{$propsName} }}
                 </x-table.th>
             @endforeach
-            <x-table.th class="text-center">
-                <button>E</button>
-                <button>D</button>
+            <x-table.th class="flex items-center text-center">
+                <a href="{{ route($route . '.show', $contentEl->id) }}"><x-buttons.info/></a>
+                <a href="{{ route($route . '.edit', $contentEl->id) }}"><x-buttons.edit/></a>
+                <a href="{{ route($route . '.destroy', $contentEl->id) }}"><x-buttons.delete/></a>
             </x-table.th>
         </x-table.tr>
     @endforeach
