@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Admin;
 
 use Tests\TestCase;
 use App\Models\User;
@@ -8,7 +8,7 @@ use App\Models\FieldOfStudy;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class AdminTest extends TestCase
+class FieldOfStudyTest extends TestCase
 {
     use RefreshDatabase;
     /**

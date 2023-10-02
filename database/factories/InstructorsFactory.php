@@ -17,7 +17,7 @@ class InstructorsFactory extends Factory
     public function definition(): array
     {
         return [
-            'first_name' => fake()->name(),
+            'first_name' => fake()->firstName(),
             'surname' => fake()->lastName(),
             'date_of_birth' => fake()->date(),
             'hire_date' => fake()->date(),
