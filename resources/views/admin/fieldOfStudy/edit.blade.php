@@ -3,6 +3,7 @@
         Edit {{ $fieldOfStudy->name }}
         <form method="POST" action="{{ route('fos.update', $fieldOfStudy->id) }}" class="mt-6 space-y-6">
             @csrf
+            @method("PATCH")
 
             <div>
                 <x-input-label for="name" :value="__('Name')" />

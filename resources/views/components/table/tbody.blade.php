@@ -12,7 +12,11 @@
             <x-table.th class="flex items-center text-center">
                 <a href="{{ route($route . '.show', $contentEl->id) }}"><x-buttons.info/></a>
                 <a href="{{ route($route . '.edit', $contentEl->id) }}"><x-buttons.edit/></a>
-                <a href="{{ route($route . '.destroy', $contentEl->id) }}"><x-buttons.delete/></a>
+                <form method="POST" action="{{ route($route . '.destroy', $contentEl->id) }}" >
+                    @csrf
+                    @method('DELETE')
+                    <x-buttons.delete type='submit'/>
+                </form>
             </x-table.th>
         </x-table.tr>
     @endforeach

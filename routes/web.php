@@ -32,8 +32,8 @@ Route::middleware('auth')->group(function () {
             Route::post('/', [FieldOfStudyController::class, 'store'])->name('fos.store');
             Route::get('/show/{id}', [FieldOfStudyController::class, 'show'])->name('fos.show');
             Route::get('/edit/{id}', [FieldOfStudyController::class, 'edit'])->name('fos.edit');
-            Route::post('/{id}', [FieldOfStudyController::class, 'update'])->name('fos.update');
-            Route::get('/{id}', [FieldOfStudyController::class, 'destroy'])->name('fos.destroy');
+            Route::patch('/{id}', [FieldOfStudyController::class, 'update'])->name('fos.update');
+            Route::delete('/{id}', [FieldOfStudyController::class, 'destroy'])->name('fos.destroy');
         });
         Route::get('/', [AdminController::class, 'index'])->name('admin.index');
     });

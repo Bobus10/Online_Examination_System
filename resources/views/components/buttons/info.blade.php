@@ -1,4 +1,4 @@
-<button type="button" {{ $attributes->merge([
+<button {{ $attributes->merge([
     'type' => 'button',
     'class' => 'rounded-full bg-blue-900 hover:bg-blue-600 text-white font-medium  text-sm px-2.5 py-2.5 text-center inline-flex items-center mr-2'
 ]) }}>
