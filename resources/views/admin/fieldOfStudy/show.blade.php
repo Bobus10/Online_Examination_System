@@ -1,5 +1,5 @@
 <x-dashboard-layout>
     <div class=" mx-5 my-5">
-        info {{ $fieldOfStudy->name }}
+        info {{ $degreeCourse->name }}
     </div>
 </x-dashboard-layout>

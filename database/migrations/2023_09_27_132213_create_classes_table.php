@@ -13,12 +13,8 @@ return new class extends Migration
     {
         Schema::create('classes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_yearbook');
-                $table->foreign('id_yearbook')->references('id')->on('yearbooks')->cascadeOnDelete();
-            $table->unsignedBigInteger('id_subject');
-                $table->foreign('id_subject')->references('id')->on('subjects')->cascadeOnDelete();
-            $table->unsignedBigInteger('id_instructor');
-                $table->foreign('id_instructor')->references('id')->on('instructors')->cascadeOnDelete();
+            $table->foreignId('student_id')->cascadeOnDelete();
+            $table->foreignId('exam_id')->cascadeOnDelete();
             $table->timestamps();
         });
     }

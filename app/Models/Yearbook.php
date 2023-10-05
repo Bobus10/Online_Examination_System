@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Yearbook extends Model
 {
@@ -13,15 +13,11 @@ class Yearbook extends Model
         'academic_year',
     ];
 
-    public function students() {
-        return $this->hasMany(Student::class, 'id_student');
-    }
-
-    public function fieldOfStudy() {
-        return $this->belongsTo(FieldOfStudy::class, 'id_field_of_study');
+    public function degreeCourse() {
+        return $this->belongsTo(DegreeCourse::class);
     }
 
     public function classes() {
-        return $this->hasMany(Classes::class, 'id_yearbook');
+        return $this->hasMany(Classes::class);
     }
 }

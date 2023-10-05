@@ -13,13 +13,12 @@ return new class extends Migration
     {
         Schema::create('instructors', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->cascadeOnDelete();
             $table->string('first_name');
             $table->string('surname');
             $table->date('date_of_birth');
             $table->date('hire_date');
             $table->integer('salary');
-            // $table->unsignedBigInteger('account'); //! Create table with enums(change teacher on instructor)
-            //     $table->foreign('account')->references('id')->on('ac_table');
             $table->timestamps();
         });
     }

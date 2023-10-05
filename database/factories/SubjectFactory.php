@@ -19,7 +19,7 @@ class SubjectFactory extends Factory
     {
         return [
             'name' => fake()->text(20),
-            'id_field_of_study' => FieldOfStudy::factory(),
+            'field_of_study_id' => FieldOfStudy::factory(),
         ];
     }
 }

@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\FieldOfStudyRequest;
-use App\Models\FieldOfStudy;
-use Illuminate\Http\Request;
+use App\Http\Requests\DegreeCourseRequest;
+use App\Models\DegreeCourse;
 
-class FieldOfStudyController extends Controller
+class DegreeCourseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +13,7 @@ class FieldOfStudyController extends Controller
     public function index()
     {
         return view('admin.fieldOfStudy.index', [
-            'fieldOfStudies' => FieldOfStudy::all(),
+            'degreeCourses' => DegreeCourse::all(),
         ]);
     }
 
@@ -29,11 +28,11 @@ class FieldOfStudyController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(FieldOfStudyRequest $request)
+    public function store(DegreeCourseRequest $request)
     {
-        $fieldOfStudy = new FieldOfStudy($request->validated());
+        $degreeCourse = new DegreeCourse($request->validated());
 
-        $fieldOfStudy->save();
+        $degreeCourse->save();
 
         return redirect()->route('fos.index');
     }
@@ -44,7 +43,7 @@ class FieldOfStudyController extends Controller
     public function show($id)
     {
         return view('admin.fieldOfStudy.show', [
-            'fieldOfStudy' => FieldOfStudy::find($id),
+            'degreeCourse' => DegreeCourse::find($id),
         ]);
     }
 
@@ -54,19 +53,19 @@ class FieldOfStudyController extends Controller
     public function edit($id)
     {
         return view('admin.fieldOfStudy.edit', [
-            'fieldOfStudy' => FieldOfStudy::find($id),
+            'degreeCourse' => DegreeCourse::find($id),
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(FieldOfStudyRequest $request, $id)
+    public function update(DegreeCourseRequest $request, $id)
     {
-        $fieldOfStudy = FieldOfStudy::find($id);
-        $fieldOfStudy->fill($request->validated());
+        $degreeCourse = DegreeCourse::find($id);
+        $degreeCourse->fill($request->validated());
 
-        $fieldOfStudy->save();
+        $degreeCourse->save();
 
         return redirect()->back();
     }
@@ -76,8 +75,8 @@ class FieldOfStudyController extends Controller
      */
     public function destroy($id)
     {
-        $fieldOfStudy = FieldOfStudy::find($id);
-        $fieldOfStudy->delete();
+        $degreeCourse = DegreeCourse::find($id);
+        $degreeCourse->delete();
 
         return redirect()->back();
     }

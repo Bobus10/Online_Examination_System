@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Subject extends Model
+class DegreeCourse extends Model
 {
     use HasFactory;
 
@@ -13,11 +13,11 @@ class Subject extends Model
         'name',
     ];
 
-    public function fieldOfStudies() {
-        return $this->hasMany(FieldOfStudy::class);
+    public function yearbooks() {
+        return $this->hasMany(Yearbook::class);
     }
 
     public function classes() {
-        return $this->hasMany(Classes::class);
+        return $this->hasManyThrough(Classes::class, Yearbook::class);
     }
 }

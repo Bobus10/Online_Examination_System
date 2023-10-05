@@ -14,10 +14,10 @@ class Questions extends Model
     ];
 
     public function exam() {
-        return $this->belongsTo(Exams::class, 'exam_id');
+        return $this->belongsTo(Exams::class);
     }
 
     public function answers() {
-        return $this->hasMany(Answers::class, 'question_id');
+        return $this->hasMany(Answers::class);
     }
 }

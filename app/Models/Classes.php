@@ -10,18 +10,14 @@ class Classes extends Model
     use HasFactory;
 
     public function yearbook() {
-        return $this->belongsTo(Yearbook::class, 'id_yearbook');
+        return $this->belongsTo(Yearbook::class);
     }
 
-    public function subject() {
-        return $this->belongsTo(Subject::class, 'id_subject');
-    }
-
-    public function instructor() {
-        return $this->belongsTo(Instructors::class, 'id_instructor');
+    public function students() {
+        return $this->hasMany(Student::class);
     }
 
     public function exams() {
-        return $this->hasMany(Exams::class, 'class_id');
+        return $this->hasMany(Exams::class);
     }
 }

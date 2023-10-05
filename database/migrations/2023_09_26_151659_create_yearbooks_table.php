@@ -13,11 +13,8 @@ return new class extends Migration
     {
         Schema::create('yearbooks', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_student');
-                $table->foreign('id_student')->references('id')->on('students');
-            $table->unsignedBigInteger('id_field_of_study');
-                $table->foreign('id_field_of_study')->references('id')->on('field_of_studies')->cascadeOnDelete();
-            $table->unsignedSmallInteger('academic_year');
+            $table->foreignId('degree_course_id')->cascadeOnDelete();
+            $table->smallInteger('academic_year');
             $table->timestamps();
         });
     }

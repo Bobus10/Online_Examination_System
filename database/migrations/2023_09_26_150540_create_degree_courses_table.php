@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('field_of_studies', function (Blueprint $table) {
+        Schema::create('degree_courses', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             // $table->enum('degree', ['bachelor', 'master', 'doctor']);
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('field_of_studies');
+        Schema::dropIfExists('degree_courses');
     }
 };

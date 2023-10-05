@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Enums\UserRoleEnums;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -45,6 +47,7 @@ class User extends Authenticatable
     ];
 
     public function students() {
-        return $this->hasOne(User::class, 'id_user');
+        return $this->hasOne(User::class);
+        // ->with('role', UserRoleEnums::STUDENT->value);
     }
 }

@@ -18,6 +18,6 @@ class Instructors extends Model
     ];
 
     public function classes() {
-        return $this->hasMany(Classes::class, 'id_instructor');
+        return $this->hasMany(Classes::class);
     }
 }

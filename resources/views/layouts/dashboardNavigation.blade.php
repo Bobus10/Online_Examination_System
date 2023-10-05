@@ -9,8 +9,9 @@
             {{-- Nav links --}}
             <nav class="mt-10">
                 <x-dashboard.nav-link route='admin.index'>Dashboard</x-dashboard.nav-link>
-                <x-dashboard.nav-link route='fos.index'>Field of study</x-dashboard.nav-link>
+                <x-dashboard.nav-link route='degree_courses.index'>Degree Courses</x-dashboard.nav-link>
                 <x-dashboard.nav-link route='instructors.index'>Instructors</x-dashboard.nav-link>
+                <x-dashboard.nav-link route='yearbooks.index'>Yearbooks</x-dashboard.nav-link>
             </nav>
         </div>
 

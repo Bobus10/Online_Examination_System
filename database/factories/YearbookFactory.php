@@ -19,8 +19,8 @@ class YearbookFactory extends Factory
     public function definition(): array
     {
         return [
-            'id_student' =>Student::factory(),
-            'id_field_of_study' =>FieldOfStudy::factory(),
+            'student_id' =>Student::factory(),
+            'field_of_study_id' =>FieldOfStudy::factory(),
             'academic_year' => fake()->numberBetween(2020, 2025),
         ];
     }

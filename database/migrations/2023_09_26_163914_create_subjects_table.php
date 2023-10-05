@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('id_field_of_study');
-                $table->foreign('id_field_of_study')->references('id')->on('field_of_studies')->cascadeOnDelete();
+            $table->foreignId('yearbook_id')->cascadeOnDelete();
             $table->timestamps();
         });
     }

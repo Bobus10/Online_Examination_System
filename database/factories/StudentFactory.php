@@ -18,7 +18,7 @@ class StudentFactory extends Factory
     public function definition(): array
     {
         return [
-            'id_user' => User::factory(),
+            'user_id' => User::factory(),
             'first_name' => fake()->name(),
             'surname' => fake()->lastName(),
             'date_of_birth' => fake()->date(),

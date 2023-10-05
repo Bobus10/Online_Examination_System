@@ -7,57 +7,46 @@ use Illuminate\Http\Request;
 
 class YearbookController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $yearbooks = Yearbook::with([
+            'degreeCourse',
+            'classes' => function ($q) {
+                $q->withCount('students');
+            }
+                ])->get();
+
+        return view('admin.yearbook.index', [
+            'yearbooks' => $yearbooks,
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Yearbook $yearbook)
+    public function show($id)
     {
-        //
+        return view('admin.yearbook.show', [
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Yearbook $yearbook)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Yearbook $yearbook)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Yearbook $yearbook)
     {
         //

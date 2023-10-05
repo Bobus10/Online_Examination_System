@@ -21,9 +21,9 @@ class ClassesFactory extends Factory
     public function definition(): array
     {
         return [
-            'id_yearbook' => Yearbook::factory(),
-            'id_subject' => Subject::factory(),
-            'id_instructor' => Instructors::factory(),
+            'yearbook_id' => Yearbook::factory(),
+            'subject_id' => Subject::factory(),
+            'instructor_id' => Instructors::factory(),
         ];
     }
 }
