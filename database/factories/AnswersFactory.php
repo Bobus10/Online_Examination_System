@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Answers;
 use App\Models\Questions;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -10,6 +11,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class AnswersFactory extends Factory
 {
+    protected $model = Answers::class;
     /**
      * Define the model's default state.
      *

@@ -2,10 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Models\Subject;
+use App\Models\Classes;
+use App\Models\Student;
 use App\Models\Yearbook;
-use App\Models\Instructors;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -13,6 +12,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class ClassesFactory extends Factory
 {
+    protected $model = Classes::class;
     /**
      * Define the model's default state.
      *
@@ -21,9 +21,8 @@ class ClassesFactory extends Factory
     public function definition(): array
     {
         return [
+            'student_id' => Student::factory(),
             'yearbook_id' => Yearbook::factory(),
-            'subject_id' => Subject::factory(),
-            'instructor_id' => Instructors::factory(),
         ];
     }
 }

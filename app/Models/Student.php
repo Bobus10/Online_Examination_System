@@ -19,11 +19,7 @@ class Student extends Model
         return $this->belongsTo(User::class);
     }
 
-    // public function FieldOfStudy() {
-    //     return $this->belongsTo(FieldOfStudy::class, 'id_field_of_study');
-    // }
-
     public function class() {
-        return $this->belongsTo(Classes::class);
+        return $this->hasOne(Classes::class);
     }
 }

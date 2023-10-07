@@ -20,4 +20,8 @@ class Yearbook extends Model
     public function classes() {
         return $this->hasMany(Classes::class);
     }
+
+    public function subjects() {
+        return $this->hasMany(Subject::class);
+    }
 }

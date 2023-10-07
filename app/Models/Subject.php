@@ -13,11 +13,15 @@ class Subject extends Model
         'name',
     ];
 
-    public function fieldOfStudies() {
-        return $this->hasMany(FieldOfStudy::class);
+    public function class() {
+        return $this->belongsTo(Classes::class);
     }
 
-    public function classes() {
-        return $this->hasMany(Classes::class);
+    public function instructor() {
+        return $this->belongsTo(Instructors::class);
+    }
+
+    public function exams() {
+        return $this->hasMany(Exams::class);
     }
 }

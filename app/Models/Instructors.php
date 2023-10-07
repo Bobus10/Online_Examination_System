@@ -17,7 +17,11 @@ class Instructors extends Model
         'salary',
     ];
 
-    public function classes() {
-        return $this->hasMany(Classes::class);
+    public function user() {
+        return $this->hasOne(User::class);
+    }
+
+    public function subjects() {
+        return $this->hasMany(Subject::class);
     }
 }

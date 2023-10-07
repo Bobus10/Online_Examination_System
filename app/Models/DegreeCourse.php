@@ -16,8 +16,4 @@ class DegreeCourse extends Model
     public function yearbooks() {
         return $this->hasMany(Yearbook::class);
     }
-
-    public function classes() {
-        return $this->hasManyThrough(Classes::class, Yearbook::class);
-    }
 }

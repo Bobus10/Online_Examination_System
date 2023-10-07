@@ -2,7 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\Classes;
+use App\Models\Exams;
+use App\Models\Subject;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -10,6 +11,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class ExamsFactory extends Factory
 {
+    protected $model = Exams::class;
     /**
      * Define the model's default state.
      *
@@ -18,8 +20,8 @@ class ExamsFactory extends Factory
     public function definition(): array
     {
         return [
-            'class_id' => Classes::factory(),
-            'pass_rate' => fake()->numberBetween(0,100),
+            'subject_id' => Subject::factory(),
+            'pass_rate' => 51,
         ];
     }
 }

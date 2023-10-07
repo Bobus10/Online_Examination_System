@@ -13,11 +13,7 @@ class Classes extends Model
         return $this->belongsTo(Yearbook::class);
     }
 
-    public function students() {
-        return $this->hasMany(Student::class);
-    }
-
-    public function exams() {
-        return $this->hasMany(Exams::class);
+    public function student() {
+        return $this->belongsTo(Student::class);
     }
 }

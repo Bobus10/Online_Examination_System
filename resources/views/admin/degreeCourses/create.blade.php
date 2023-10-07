@@ -1,6 +1,6 @@
 <x-dashboard-layout>
     <div class=" mx-5 my-5 text-center">
-        <form method="POST" action="{{ route('fos.store') }}" class="mt-6 space-y-6">
+        <form method="POST" action="{{ route('degree_courses.store') }}" class="mt-6 space-y-6">
             @csrf
 
             <div>

@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Exams;
+use App\Models\Questions;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -10,6 +11,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class QuestionsFactory extends Factory
 {
+    protected $model = Questions::class;
     /**
      * Define the model's default state.
      *

@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Models\FieldOfStudy;
+use App\Models\Instructors;
+use App\Models\Subject;
+use App\Models\Yearbook;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -10,6 +12,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class SubjectFactory extends Factory
 {
+    protected $model = Subject::class;
     /**
      * Define the model's default state.
      *
@@ -19,7 +22,8 @@ class SubjectFactory extends Factory
     {
         return [
             'name' => fake()->text(20),
-            'field_of_study_id' => FieldOfStudy::factory(),
+            'yearbook_id' => Yearbook::factory(),
+            'instructor_id' => Instructors::factory(),
         ];
     }
 }

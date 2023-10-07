@@ -27,14 +27,14 @@
                     {{ $loop->iteration }}
                 </x-table.th>
 
-                    <th>{{ $yearbook->fieldOfStudy->name }}</th>
+                    <th>{{ $yearbook->degreeCourse->name }}</th>
                     <th>{{ $yearbook->students_count }}</th>
                     <th>{{ $yearbook->academic_year }}</th>
 
                 <x-table.th class="flex items-center text-center">
-                    <a href="{{ route('yearbooks.show', $yearbook->id_field_of_study) }}"><x-buttons.info/></a>
-                    <a href="{{ route('yearbooks.edit', $yearbook->id_field_of_study) }}"><x-buttons.edit/></a>
-                    <form method="POST" action="{{ route('yearbooks.destroy', $yearbook->id_field_of_study) }}" >
+                    <a href="{{ route('yearbooks.show', $yearbook->id) }}"><x-buttons.info/></a>
+                    <a href="{{ route('yearbooks.edit', $yearbook->id) }}"><x-buttons.edit/></a>
+                    <form method="POST" action="{{ route('yearbooks.destroy', $yearbook->id) }}" >
                         @csrf
                         @method('DELETE')
                         <x-buttons.delete type='submit'/>

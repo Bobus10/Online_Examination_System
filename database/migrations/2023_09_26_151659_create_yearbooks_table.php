@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('yearbooks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('degree_course_id')->cascadeOnDelete();
+            $table->foreignId('degree_course_id')->constrained('degree_courses')->cascadeOnUpdate()->cascadeOnDelete();
             $table->smallInteger('academic_year');
             $table->timestamps();
         });

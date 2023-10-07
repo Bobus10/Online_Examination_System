@@ -12,7 +12,7 @@ class YearbookController extends Controller
         $yearbooks = Yearbook::with([
             'degreeCourse',
             'classes' => function ($q) {
-                $q->withCount('students');
+                $q->withCount('student');
             }
                 ])->get();
 

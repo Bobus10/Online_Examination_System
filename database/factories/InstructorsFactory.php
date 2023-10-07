@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,6 +18,7 @@ class InstructorsFactory extends Factory
     public function definition(): array
     {
         return [
+            'user_id' => User::factory(),
             'first_name' => fake()->firstName(),
             'surname' => fake()->lastName(),
             'date_of_birth' => fake()->date(),

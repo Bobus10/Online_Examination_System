@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('exams', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('subject_id')->constrained('subjects')->cascadeOnUpdate()->cascadeOnDelete();
             $table->smallInteger('pass_rate')->default(51);
             $table->timestamps();
         });

@@ -12,7 +12,7 @@ class DegreeCourseController extends Controller
      */
     public function index()
     {
-        return view('admin.fieldOfStudy.index', [
+        return view('admin.degreeCourses.index', [
             'degreeCourses' => DegreeCourse::all(),
         ]);
     }
@@ -22,7 +22,7 @@ class DegreeCourseController extends Controller
      */
     public function create()
     {
-        return view('admin.fieldOfStudy.create');
+        return view('admin.degreeCourses.create');
     }
 
     /**
@@ -34,7 +34,7 @@ class DegreeCourseController extends Controller
 
         $degreeCourse->save();
 
-        return redirect()->route('fos.index');
+        return redirect()->route('degree_courses.index');
     }
 
     /**
@@ -42,8 +42,8 @@ class DegreeCourseController extends Controller
      */
     public function show($id)
     {
-        return view('admin.fieldOfStudy.show', [
-            'degreeCourse' => DegreeCourse::find($id),
+        return view('admin.degreeCourses.show', [
+            'degreeCourse' => DegreeCourse::with('yearbooks')->find($id),
         ]);
     }
 
@@ -52,7 +52,7 @@ class DegreeCourseController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.fieldOfStudy.edit', [
+        return view('admin.degreeCourses.edit', [
             'degreeCourse' => DegreeCourse::find($id),
         ]);
     }

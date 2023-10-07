@@ -13,11 +13,11 @@ class Exams extends Model
         'pass_rate',
     ];
 
-    public function classes() {
-        return $this->belongsToMany(Classes::class);
+    public function subject() {
+        return $this->belongsTo(Subject::class);
     }
 
     public function questions() {
-        return $this->hasMany(Questions::class);
+        return $this->hasMany(Questions::class, 'exam_id');
     }
 }

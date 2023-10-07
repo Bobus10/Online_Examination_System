@@ -46,8 +46,13 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function students() {
+    public function student() {
         return $this->hasOne(User::class);
         // ->with('role', UserRoleEnums::STUDENT->value);
+    }
+
+    public function instructor() {
+        return $this->hasOne(User::class);
+        // ->with('role', UserRoleEnums::INSTRUCTOR->value);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Student;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -10,6 +11,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class StudentFactory extends Factory
 {
+    protected $model = Student::class;
     /**
      * Define the model's default state.
      *
