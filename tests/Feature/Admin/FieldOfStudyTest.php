@@ -2,13 +2,13 @@
 
 namespace Tests\Feature\Admin;
 
+use App\Models\DegreeCourse;
 use Tests\TestCase;
 use App\Models\User;
-use App\Models\FieldOfStudy;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class FieldOfStudyTest extends TestCase
+class DegreeCourseTest extends TestCase
 {
     use RefreshDatabase;
     /**
@@ -52,10 +52,10 @@ class FieldOfStudyTest extends TestCase
 
     public function test_admin_has_permissions_to_open_admin_field_of_studies_info(): void
     {
-        $fieldOfStudy = FieldOfStudy::factory()->create();
+        $degreeCourse = DegreeCourse::factory()->create();
         $user = User::factory()->create(['role' => 'admin']);
 
-        $response = $this->actingAs($user)->get("/admin/field_of_studies/show/{$fieldOfStudy->id}");
+        $response = $this->actingAs($user)->get("/admin/field_of_studies/show/{$degreeCourse->id}");
 
         $response->assertStatus(200);
     }
@@ -85,41 +85,41 @@ class FieldOfStudyTest extends TestCase
 
     public function test_admin_has_permissions_to_open_admin_field_of_studies_edit(): void
     {
-        $fieldOfStudy = FieldOfStudy::factory()->create();
+        $degreeCourse = DegreeCourse::factory()->create();
         $user = User::factory()->create(['role' => 'admin']);
 
-        $response = $this->actingAs($user)->get("/admin/field_of_studies/edit/{$fieldOfStudy->id}");
+        $response = $this->actingAs($user)->get("/admin/field_of_studies/edit/{$degreeCourse->id}");
 
         $response->assertStatus(200);
     }
 
     public function test_admin_can_update_field_of_studies(): void
     {
-        $fieldOfStudy = FieldOfStudy::factory()->create(['name' => 'Field of Study Name']);
+        $degreeCourse = DegreeCourse::factory()->create(['name' => 'Field of Study Name']);
         $admin = User::factory()->create(['role' => 'admin']);
 
         $data = [
             'name' => 'Updated Field of Study Name'
         ];
 
-        $response = $this->actingAs($admin)->patch("/admin/field_of_studies/{$fieldOfStudy->id}", $data);
+        $response = $this->actingAs($admin)->patch("/admin/field_of_studies/{$degreeCourse->id}", $data);
         $response->assertStatus(302);
 
-        $fieldOfStudy->refresh();
+        $degreeCourse->refresh();
 
-        $this->assertEquals('Updated Field of Study Name', $fieldOfStudy->name);
+        $this->assertEquals('Updated Field of Study Name', $degreeCourse->name);
         $this->assertDatabaseHas("field_of_studies", ['name' => 'Updated Field of Study Name']);
         $this->assertDatabaseMissing("field_of_studies", ['name' => 'Field of Study Name']);
     }
 
     public function test_admin_can_delete_field_of_studies(): void
     {
-        $fieldOfStudy = FieldOfStudy::factory()->create();
+        $degreeCourse = DegreeCourse::factory()->create();
         $admin = User::factory()->create(['role' => 'admin']);
 
-        $response = $this->actingAs($admin)->delete("/admin/field_of_studies/{$fieldOfStudy->id}");
+        $response = $this->actingAs($admin)->delete("/admin/field_of_studies/{$degreeCourse->id}");
         $response->assertStatus(302);
 
-        $this->assertDatabaseMissing("field_of_studies", ['id' => $fieldOfStudy->id]);
+        $this->assertDatabaseMissing("field_of_studies", ['id' => $degreeCourse->id]);
     }
 }
