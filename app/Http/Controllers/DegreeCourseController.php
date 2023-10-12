@@ -42,8 +42,8 @@ class DegreeCourseController extends Controller
      */
     public function show($id)
     {
-        return view('admin.degreeCourses.show', [
-            'degreeCourse' => DegreeCourse::with('yearbooks')->find($id),
+        return view('admin.yearbook.index', [
+            'degreeCourse' => DegreeCourse::find($id)->with('yearbooks')->get(),
         ]);
     }
 

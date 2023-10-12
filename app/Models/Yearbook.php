@@ -10,6 +10,7 @@ class Yearbook extends Model
     use HasFactory;
 
     protected $fillable = [
+        'degree_course_id',
         'academic_year',
     ];
 

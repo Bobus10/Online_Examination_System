@@ -2,53 +2,73 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\YearbookRequest;
+use App\Models\DegreeCourse;
 use App\Models\Yearbook;
-use Illuminate\Http\Request;
 
 class YearbookController extends Controller
 {
-    public function index()
+    public function index($id)
     {
-        $yearbooks = Yearbook::with([
-            'degreeCourse',
-            'classes' => function ($q) {
-                $q->withCount('student');
-            }
-                ])->get();
+        $yearbooks = Yearbook::with('degreeCourse')->where('degree_course_id', $id)->withCount('classes')->get();
 
         return view('admin.yearbook.index', [
             'yearbooks' => $yearbooks,
         ]);
     }
 
-    public function create()
+    public function create($id)
     {
-        //
+        $degreeCourse = DegreeCourse::find($id);
+
+        return view('admin.yearbook.create', [
+            'degreeCourse' => $degreeCourse,
+        ]);
     }
 
-    public function store(Request $request)
+    public function store(YearbookRequest $request, $id)
     {
-        //
+        $yearbook = new Yearbook($request->validated());
+        $yearbook->save();
+
+        $yearbook->with('degreeCourse')->find($id);
+        $id = $yearbook->degreeCourse->id;
+
+        return redirect()->route('yearbooks.index', $id);
     }
 
     public function show($id)
     {
-        return view('admin.yearbook.show', [
+        return view('admin.yearbook.show', []);
+    }
+
+    public function edit($id)
+    {
+        $yearbook = Yearbook::with('degreeCourse')->find($id);
+
+        return view('admin.yearbook.edit', [
+            'yearbook' => $yearbook,
         ]);
     }
 
-    public function edit(Yearbook $yearbook)
+    public function update(YearbookRequest $request, $id)
     {
-        //
+        $yearbook = Yearbook::find($id);
+
+        $yearbook->fill($request->validated());
+        $yearbook->save();
+
+        $yearbook->with('degreeCourse');
+        $id = $yearbook->degreeCourse->id;
+
+        return redirect()->route('yearbooks.index', $id);
     }
 
-    public function update(Request $request, Yearbook $yearbook)
+    public function destroy($id)
     {
-        //
-    }
+        $yearbook = Yearbook::find($id);
+        $yearbook->delete();
 
-    public function destroy(Yearbook $yearbook)
-    {
-        //
+        return redirect()->back();
     }
 }

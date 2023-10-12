@@ -2,10 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\DegreeCourseController;
-use App\Http\Controllers\InstructorsController;
+use App\Http\Controllers\ClassesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\YearbookController;
+use App\Http\Controllers\InstructorsController;
+use App\Http\Controllers\DegreeCourseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,7 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::middleware('isAdmin')->prefix('/admin')->group(function () {
+
         Route::prefix('/degree_courses')->group(function () {
             Route::get('/', [DegreeCourseController::class, 'index'])->name('degree_courses.index');
             Route::get('/create', [DegreeCourseController::class, 'create'])->name('degree_courses.create');
@@ -36,6 +38,27 @@ Route::middleware('auth')->group(function () {
             Route::get('/edit/{id}', [DegreeCourseController::class, 'edit'])->name('degree_courses.edit');
             Route::patch('/{id}', [DegreeCourseController::class, 'update'])->name('degree_courses.update');
             Route::delete('/{id}', [DegreeCourseController::class, 'destroy'])->name('degree_courses.destroy');
+
+            Route::prefix('/yearbook')->group(function () {
+                Route::controller(YearbookController::class)->name('yearbooks.')->group(function () {
+                Route::get('/{id}', 'index')->name('index');
+                Route::get('/create/{id}', 'create')->name('create');
+                Route::post('/{id}', 'store')->name('store');
+                // Route::get('/show/{id}', 'show')->name('show');
+                Route::get('/edit/{id}', 'edit')->name('edit');
+                Route::patch('/{id}', 'update')->name('update');
+                Route::delete('/{id}', 'destroy')->name('destroy');
+                });
+                Route::prefix('/class')->group(function () {
+                    Route::get('/{id}', [ClassesController::class, 'index'])->name('class.index');
+                    Route::get('/create', [ClassesController::class, 'create'])->name('class.create');
+                    Route::post('/', [ClassesController::class, 'store'])->name('class.store');
+                    Route::get('/show/{id}', [ClassesController::class, 'show'])->name('class.show');
+                    Route::get('/edit/{id}', [ClassesController::class, 'edit'])->name('class.edit');
+                    Route::patch('/{id}', [ClassesController::class, 'update'])->name('class.update');
+                    Route::delete('/{id}', [ClassesController::class, 'destroy'])->name('class.destroy');
+                });
+            });
         });
         Route::prefix('/instructors')->group(function () {
             Route::get('/', [InstructorsController::class, 'index'])->name('instructors.index');
@@ -45,15 +68,6 @@ Route::middleware('auth')->group(function () {
             Route::get('/edit/{id}', [InstructorsController::class, 'edit'])->name('instructors.edit');
             Route::patch('/{id}', [InstructorsController::class, 'update'])->name('instructors.update');
             Route::delete('/{id}', [InstructorsController::class, 'destroy'])->name('instructors.destroy');
-        });
-        Route::prefix('/yearbooks')->group(function () {
-            Route::get('/', [YearbookController::class, 'index'])->name('yearbooks.index');
-            Route::get('/create', [YearbookController::class, 'create'])->name('yearbooks.create');
-            Route::post('/', [YearbookController::class, 'store'])->name('yearbooks.store');
-            Route::get('/show/{id}', [YearbookController::class, 'show'])->name('yearbooks.show');
-            Route::get('/edit/{id}', [YearbookController::class, 'edit'])->name('yearbooks.edit');
-            Route::patch('/{id}', [YearbookController::class, 'update'])->name('yearbooks.update');
-            Route::delete('/{id}', [YearbookController::class, 'destroy'])->name('yearbooks.destroy');
         });
         Route::get('/', [AdminController::class, 'index'])->name('admin.index');
     });

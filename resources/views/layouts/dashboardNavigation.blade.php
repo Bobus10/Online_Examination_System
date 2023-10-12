@@ -11,7 +11,7 @@
                 <x-dashboard.nav-link route='admin.index'>Dashboard</x-dashboard.nav-link>
                 <x-dashboard.nav-link route='degree_courses.index'>Degree Courses</x-dashboard.nav-link>
                 <x-dashboard.nav-link route='instructors.index'>Instructors</x-dashboard.nav-link>
-                <x-dashboard.nav-link route='yearbooks.index'>Yearbooks</x-dashboard.nav-link>
+                {{-- <x-dashboard.nav-link route='yearbooks.index'>Yesarbooks</x-dashboard.nav-link> --}}
             </nav>
         </div>
 

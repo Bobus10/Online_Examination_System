@@ -21,9 +21,9 @@ class DegreeCourseSeeder extends Seeder
      */
     public function run(): void
     {
-        DegreeCourse::factory(3)
+        DegreeCourse::factory(2)
             ->has(Yearbook::factory(3)
-                ->has(Classes::factory(3)
+                ->has(Classes::factory(4)
                     ->has(Student::factory())
                 )
                 ->has(Subject::factory(4)
