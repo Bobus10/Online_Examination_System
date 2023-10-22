@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Classes;
-use App\Models\Student;
 use App\Models\Yearbook;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -21,7 +20,7 @@ class ClassesFactory extends Factory
     public function definition(): array
     {
         return [
-            'student_id' => Student::factory(),
+            'label' => fake()->unique()->lexify('?'),
             'yearbook_id' => Yearbook::factory(),
         ];
     }

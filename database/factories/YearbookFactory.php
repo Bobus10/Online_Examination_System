@@ -22,7 +22,7 @@ class YearbookFactory extends Factory
     {
         return [
             'degree_course_id' => DegreeCourse::factory(),
-            'academic_year' => fake()->numberBetween(2019, 2023),
+            'academic_year' => fake()->numberBetween(1, 6),
         ];
     }
 }

@@ -33,7 +33,7 @@ Route::middleware('auth')->group(function () {
         Route::prefix('/degree_courses')->group(function () {
             Route::controller(DegreeCourseController::class)->name('degree_courses.')->group(function () {
                 Route::get('/', 'index')->name('index');
-                Route::get('/create', [, 'create'])->name('create');
+                Route::get('/create', 'create')->name('create');
                 Route::post('/', 'store')->name('store');
                 Route::get('/show/{id}', 'show')->name('show');
                 Route::get('/edit/{id}', 'edit')->name('edit');

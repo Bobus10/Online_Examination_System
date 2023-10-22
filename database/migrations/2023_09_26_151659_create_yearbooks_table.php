@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('degree_course_id')->constrained('degree_courses')->cascadeOnUpdate()->cascadeOnDelete();
             $table->smallInteger('academic_year');
+            // todo change academic_year to session
+            // $table->smallInteger('session');
+            //     $table->unique(['session', 'degree_course_id']);
             $table->timestamps();
         });
     }

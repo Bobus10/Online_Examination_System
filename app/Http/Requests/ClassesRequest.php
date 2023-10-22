@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 
-class YearbookRequest extends FormRequest
+class ClassesRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,13 +21,10 @@ class YearbookRequest extends FormRequest
      */
     public function rules(): array
     {
-        // $minAcademicYear = Carbon::now()->subYears(5)->format('Y');
-        // $maxAcademicYear = Carbon::now()->addYears(5)->format('Y');
+        $yearbook = $this->input('yearbook_id');
 
         return [
-            'degree_course_id' => 'required|exists:degree_courses,id',
-            'academic_year' => 'required|numeric|'
-            // min:' . $minAcademicYear. '|max:' . $maxAcademicYear,
+            'label' => 'required|alpha|max:1|unique:classes,label,NULL,id,yearbook_id,' .$yearbook
         ];
     }
 }

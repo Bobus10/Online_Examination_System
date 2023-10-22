@@ -21,10 +21,22 @@ class DegreeCourseSeeder extends Seeder
      */
     public function run(): void
     {
-        DegreeCourse::factory(2)
+        $currentLetter = 'A';
+        $classesCount = 4;
+
+        DegreeCourse::factory()
             ->has(Yearbook::factory(3)
-                ->has(Classes::factory(4)
-                    ->has(Student::factory())
+                ->has(Classes::factory($classesCount)->state([
+                    'label' => function () use (&$currentLetter, $classesCount) {
+                        $letterNumber = ord($currentLetter) - ord('A') + 1;
+                        if ($letterNumber > $classesCount) {
+                            $currentLetter = 'A';
+                        }
+                        $label = $currentLetter;
+                        $currentLetter++;
+                        return $label;
+                    }])
+                    ->has(Student::factory(5))
                 )
                 ->has(Subject::factory(4)
                     ->has(Instructors::factory(1))
