@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ClassesRequest;
 use App\Models\Classes;
+use App\Models\Student;
 use App\Models\Yearbook;
 use Illuminate\Http\Request;
 
@@ -13,12 +15,10 @@ class ClassesController extends Controller
      */
     public function index($id)
     {
-        $classes = Classes::with(['yearbook', 'students'])->where('yearbook_id', $id)->get();
-        // $students = Classes::withCount('students');
+        $classes = Classes::with(['yearbook.degreeCourse', 'students'])->where('yearbook_id', $id)->get();
 
         return view('admin.class.index', [
             'classes' => $classes,
-            // 'students' => $students,
         ]);
     }
 
@@ -41,9 +41,14 @@ class ClassesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Classes $classes)
+    public function show($id)
     {
-        //
+        $class = Classes::with(['yearbook.degreeCourse', 'students'])->find($id);
+
+        return view('admin.class.show', [
+            'class' => $class,
+        ]);
+
     }
 
     /**
@@ -51,13 +56,31 @@ class ClassesController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.class.edit');
+
+        $class = Classes::with(['yearbook.degreeCourse', 'students'])->find($id);
+
+        if(!$class) {
+            return redirect()->back();
+            // ->route('degree_courses.index');
+        }
+
+            // dd($class);
+        // $studentsWithoutClass = $class->students->where('classes_id', NULL);
+        $studentsInClass = $class->students;
+            // dd($studentsInClass);
+        $studentsWithoutClass = Student::whereNull('classes_id')->get();
+            // dd($studentsWithoutClass);
+        return view('admin.class.edit', [
+            'class' => $class,
+            'studentsInClass' => $studentsInClass,
+            'studentsWithoutClass' => $studentsWithoutClass,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Classes $classes)
+    public function update(ClassesRequest $request, $id)
     {
         //
     }
@@ -65,8 +88,19 @@ class ClassesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Classes $classes)
+    public function destroy($id)
     {
-        //
+        return redirect()->back();
+    }
+
+    public function extrusionStudent($studentId) {
+        $student = Student::where('id', $studentId)->first();
+
+        if( $student ) {
+            $student->update( ['classes_id'=> null ] );
+        }
+        // dd($student);
+
+        return redirect()->back();
     }
 }

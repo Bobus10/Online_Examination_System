@@ -61,6 +61,7 @@ Route::middleware('auth')->group(function () {
                         Route::get('/edit/{id}', 'edit')->name('edit');
                         Route::patch('/{id}', 'update')->name('update');
                         Route::delete('/{id}', 'destroy')->name('destroy');
+                        Route::patch('/{id}', 'extrusionStudent')->name('extrusionStudent');
                     });
                 });
             });
