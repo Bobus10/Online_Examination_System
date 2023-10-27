@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ClassesRequest;
+use App\Http\Requests\YearbookRequest;
 use App\Models\Classes;
 use App\Models\Student;
 use App\Models\Yearbook;
@@ -10,9 +11,6 @@ use Illuminate\Http\Request;
 
 class ClassesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index($id)
     {
         $classes = Classes::with(['yearbook.degreeCourse', 'students'])->where('yearbook_id', $id)->get();
@@ -22,25 +20,53 @@ class ClassesController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function create($id)
     {
-        //
+        $yearbook = Yearbook::with(['degreeCourse','classes.students'])->find($id);
+        $nextLetter = $this->getNextLetter($id);
+
+        $studentsWithoutClass = Student::whereNull('classes_id')->get();
+
+
+        return view('admin.class.create', [
+            'yearbook' => $yearbook,
+            'nextLetter' => $nextLetter,
+            'studentsWithoutClass' => $studentsWithoutClass,
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    // Create new class with next label latter, iterate on array of chosen students and change classes_id on new class id
+    public function store($yearbookId, Request $request)
     {
-        //
+        $yearbook = Yearbook::find($yearbookId);
+        $chosenStudents = $request->input('chosenStudents');
+
+        if (!$chosenStudents) {
+            $chosenStudents = [];
+        }
+        session('chosenStudents', $chosenStudents);
+
+        if (!$yearbook) {
+            return redirect()->back()->with('error', 'Yearbook not found!');
+        } else {
+            $newClass = new Classes([
+                    'label' => $this->getNextLetter($yearbookId),
+                    'yearbook_id' => $yearbook->id,
+                ]);
+
+            $yearbook->classes()->save($newClass);
+
+            foreach ($chosenStudents as $studentId) {
+                $student = Student::find($studentId);
+                if ($student) {
+                    $student->update(['classes_id' => $newClass->id]);
+                }
+            }
+        }
+
+        return redirect()->route('class.index', $yearbook->id);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show($id)
     {
         $class = Classes::with(['yearbook.degreeCourse', 'students'])->find($id);
@@ -51,25 +77,18 @@ class ClassesController extends Controller
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit($id)
     {
-
         $class = Classes::with(['yearbook.degreeCourse', 'students'])->find($id);
 
         if(!$class) {
             return redirect()->back();
-            // ->route('degree_courses.index');
         }
 
-            // dd($class);
-        // $studentsWithoutClass = $class->students->where('classes_id', NULL);
         $studentsInClass = $class->students;
-            // dd($studentsInClass);
+
         $studentsWithoutClass = Student::whereNull('classes_id')->get();
-            // dd($studentsWithoutClass);
+
         return view('admin.class.edit', [
             'class' => $class,
             'studentsInClass' => $studentsInClass,
@@ -77,30 +96,42 @@ class ClassesController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(ClassesRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        //
+        $class = Classes::with('students')->find($id);
+
+        $chosenStudents = $request->input('chosenStudents');
+
+        if (!$chosenStudents) {
+            $chosenStudents = [];
+        }
+        session('chosenStudents', $chosenStudents);
+
+        foreach ($chosenStudents as $studentId) {
+            $student = Student::find($studentId);
+            if ($student && $student->classes_id != $class->id) {
+                $student->update(['classes_id' => $class->id]);
+            }
+        }
+
+        return redirect()->route('class.edit', $class->id);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy($id)
     {
         return redirect()->back();
     }
 
-    public function extrusionStudent($studentId) {
-        $student = Student::where('id', $studentId)->first();
+    public function getNextLetter($yearbookId)
+    {
+        //TODO: if delete class from middle fill in the gap | (A,B,D) fill up 'C'
+        $yearbook = Yearbook::find($yearbookId);
 
-        if( $student ) {
-            $student->update( ['classes_id'=> null ] );
-        }
-        // dd($student);
+        $labels = $yearbook->classes->pluck('label');
+        $lastLabel = $labels->last();
 
-        return redirect()->back();
+        $nextLetter = chr(ord($lastLabel) + 1);
+
+        return $nextLetter;
     }
 }

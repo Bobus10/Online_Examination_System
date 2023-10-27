@@ -6,54 +6,55 @@
             {{ $class->yearbook->academic_year }}
             {{ $class->label }}
         </div>
-        <form action="" method="POST">
+        <form method="POST" action="{{ route('class.update', $class->id) }}">
             @csrf
             @method("PATCH")
-            <table>
-                <caption>
-                    Students in class
-                </caption>
 
-                <thead>
-                    <tr>
-                        <th>
-                            #
-                        </th>
-                        <th>
-                            Id
-                        </th>
-                        <th>
-                            First name
-                        </th>
-                        <th>
-                            Surname
-                        </th>
-                        <th>
-                            Buttons
-                        </th>
-                    </tr>
-                </thead>
+            @if ($studentsInClass->count() > 0)
+                <table>
+                    <caption>
+                        Students in class
+                    </caption>
 
-                <tbody>
-                    @foreach ($studentsInClass as $studentInClass)
-                        <x-table.tr>
-
-                            <x-table.th class="text-center bg-gray-800 text-white">
-                                {{ $loop->iteration }}
-                            </x-table.th>
-
-                            <th> {{ $studentInClass->id}} </th>
-                            <th> {{ $studentInClass->first_name}} </th>
-                            <th> {{ $studentInClass->surname}} </th>
+                    <thead>
+                        <tr>
                             <th>
-                                <label>
-                                    <input type="checkbox" @if ($studentInClass) checked @endif>
-                                </label>
+                                #
                             </th>
-                        </x-table.tr>
-                    @endforeach
-                </tbody>
-            </table>
+                            <th>
+                                Id
+                            </th>
+                            <th>
+                                First name
+                            </th>
+                            <th>
+                                Surname
+                            </th>
+                            <th>
+                                Buttons
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach ($studentsInClass as $studentInClass)
+                            <x-table.tr>
+                                <x-table.th class="text-center bg-gray-800 text-white">
+                                    {{ $loop->iteration }}
+                                </x-table.th>
+                                <th> {{ $studentInClass->id}} </th>
+                                <th> {{ $studentInClass->first_name}} </th>
+                                <th> {{ $studentInClass->surname}} </th>
+                                <th>
+                                    <label for="student_{{ $studentInClass->id }}">
+                                        <input type="checkbox" name="chosenStudents[{{ $studentInClass->id }}]" id="student_{{ $studentInClass->id }}" value="{{ $studentInClass->id }}" @if ($studentInClass) checked @endif>
+                                    </label>
+                                </th>
+                            </x-table.tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            @endif
 
             <table>
                 <caption>
@@ -92,13 +93,14 @@
                             <th> {{ $studentWithoutClass->first_name}} </th>
                             <th> {{ $studentWithoutClass->surname}} </th>
                             <th>
-                                <input type="checkbox"/>
+                                <label for="student_{{ $studentWithoutClass->id }}">
+                                    <input type="checkbox" name="chosenStudents[{{ $studentWithoutClass->id }}]" id="student_{{ $studentWithoutClass->id }}" value="{{ $studentWithoutClass->id }}" @if ($studentWithoutClass) unchecked @endif>
+                                </label>
                             </th>
                         </x-table.tr>
                     @endforeach
                 </tbody>
             </table>
-
 
             <button type="submit">Save</button>
         </form>

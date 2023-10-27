@@ -55,13 +55,12 @@ Route::middleware('auth')->group(function () {
                 Route::prefix('/class')->group(function () {
                     Route::controller(ClassesController::class)->name('class.')->group(function () {
                         Route::get('/{id}', 'index')->name('index');
-                        Route::get('/create', 'create')->name('create');
-                        Route::post('/', 'store')->name('store');
+                        Route::get('/create/{id}', 'create')->name('create');
+                        Route::post('/{id}', 'store')->name('store');
                         Route::get('/show/{id}', 'show')->name('show');
                         Route::get('/edit/{id}', 'edit')->name('edit');
                         Route::patch('/{id}', 'update')->name('update');
                         Route::delete('/{id}', 'destroy')->name('destroy');
-                        Route::patch('/{id}', 'extrusionStudent')->name('extrusionStudent');
                     });
                 });
             });

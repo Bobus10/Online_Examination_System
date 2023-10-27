@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\YearbookRequest;
+use App\Models\Classes;
 use App\Models\DegreeCourse;
 use App\Models\Yearbook;
 
@@ -30,6 +31,13 @@ class YearbookController extends Controller
     {
         $yearbook = new Yearbook($request->validated());
         $yearbook->save();
+
+        $class = new Classes([
+            'label' => 'A',
+            'yearbook_id' => $yearbook->id,
+        ]);
+
+        $class->save();
 
         $yearbook->with('degreeCourse')->find($id);
         $id = $yearbook->degreeCourse->id;

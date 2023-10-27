@@ -2,7 +2,7 @@
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-5 my-5">
         <div class="text-lg">
             {{ $classes->first()->yearbook->degreeCourse->name }} {{ $classes->first()->yearbook->academic_year }}
-            {{-- <a href="{{ route('class.create') }}"<x-buttons.create/></a> --}}
+            <a href="{{ route('class.create', $classes->first()->yearbook->id) }}"<x-buttons.create/></a>
         </div>
         <table>
             <thead>
