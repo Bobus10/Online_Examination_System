@@ -96,9 +96,13 @@ class ClassesController extends Controller
         ]);
     }
 
+    // updating students.classes_id if classes.id is different and excludes students who were not chosen
     public function update(Request $request, $id)
     {
         $class = Classes::with('students')->find($id);
+        $classId = $class->id;
+
+        $studentsInClass = $class->students->pluck('id')->toArray();
 
         $chosenStudents = $request->input('chosenStudents');
 
@@ -107,10 +111,18 @@ class ClassesController extends Controller
         }
         session('chosenStudents', $chosenStudents);
 
-        foreach ($chosenStudents as $studentId) {
+        $students = array_unique([...$studentsInClass, ...$chosenStudents]);
+
+        foreach ($students as $studentId) {
             $student = Student::find($studentId);
-            if ($student && $student->classes_id != $class->id) {
-                $student->update(['classes_id' => $class->id]);
+            $studentClassId = $student->classes_id;
+
+            if ($student) {
+                if ($studentClassId != $classId) {
+                    $student->update(['classes_id' => $classId]);
+                } else if (!array_key_exists($studentId, $chosenStudents)) {
+                    $student->update(['classes_id'=> NULL]);
+                }
             }
         }
 
