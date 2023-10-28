@@ -13,7 +13,7 @@ class ClassesController extends Controller
 {
     public function index($id)
     {
-        $classes = Classes::with(['yearbook.degreeCourse', 'students'])->where('yearbook_id', $id)->get();
+        $classes = Classes::with(['yearbook.degreeCourse', 'students'])->where('yearbook_id', $id)->orderBy('label')->get();
 
         return view('admin.class.index', [
             'classes' => $classes,
@@ -134,15 +134,22 @@ class ClassesController extends Controller
         return redirect()->back();
     }
 
+    // Set label in alphabetic order, if delete class from middle fill in the gap | (A,B,D) fill up 'C'
     public function getNextLetter($yearbookId)
     {
-        //TODO: if delete class from middle fill in the gap | (A,B,D) fill up 'C'
         $yearbook = Yearbook::find($yearbookId);
 
-        $labels = $yearbook->classes->pluck('label');
-        $lastLabel = $labels->last();
+        $labels = $yearbook->classes->pluck('label')->toArray();
 
-        $nextLetter = chr(ord($lastLabel) + 1);
+        $alphabet = range('A','Z');
+        $nextLetter = null;
+
+        foreach ($alphabet as $letter) {
+            if(!in_array($letter, $labels)) {
+                $nextLetter = $letter;
+                break;
+            }
+        }
 
         return $nextLetter;
     }
