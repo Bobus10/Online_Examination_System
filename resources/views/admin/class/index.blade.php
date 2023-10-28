@@ -34,11 +34,11 @@
                         <x-table.th class="flex items-center text-center">
                             <a href="{{ route('class.show', $class->id) }}"><x-buttons.info/></a>
                             <a href="{{ route('class.edit', $class->id) }}"><x-buttons.edit/></a>
-                            {{-- <form method="POST" action="{{ route('class.destroy', $class->id) }}" >
+                            <form method="POST" action="{{ route('class.destroy', $class->id) }}" >
                                 @csrf
                                 @method('DELETE')
                                 <x-buttons.delete type='submit'/>
-                            </form> --}}
+                            </form>
                         </x-table.th>
                     </x-table.tr>
                 @endforeach

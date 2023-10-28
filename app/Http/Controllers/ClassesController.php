@@ -99,7 +99,11 @@ class ClassesController extends Controller
     // updating students.classes_id if classes.id is different and excludes students who were not chosen
     public function update(Request $request, $id)
     {
-        $class = Classes::with('students')->find($id);
+        $class = Classes::with(['students', 'yearbook'])->find($id);
+
+        $yearbookId = $class->yearbook->id;
+        $class->update(['label' => $this->getNextLetter($yearbookId)]);
+
         $classId = $class->id;
 
         $studentsInClass = $class->students->pluck('id')->toArray();
@@ -126,15 +130,28 @@ class ClassesController extends Controller
             }
         }
 
-        return redirect()->route('class.edit', $class->id);
+        return redirect()->route('class.index', $yearbookId);
     }
 
     public function destroy($id)
     {
+        $class = Classes::with('students')->find($id);
+
+        $studentsInClass = $class->students->pluck('id')->toArray();
+
+        foreach ($studentsInClass as $studentId) {
+            $student = Student::find($studentId);
+            if ($student) {
+                $student->update(['classes_id' => NULL]);
+            }
+        }
+
+        $class->delete();
+
         return redirect()->back();
     }
 
-    // Set label in alphabetic order, if delete class from middle fill in the gap | (A,B,D) fill up 'C'
+    // Set label in alphabetic order, if delete class from middle fill in a gap | (A,B,D) fill up 'C'
     public function getNextLetter($yearbookId)
     {
         $yearbook = Yearbook::find($yearbookId);
