@@ -2,16 +2,16 @@
 
 namespace Database\Factories;
 
-use App\Models\Answers;
-use App\Models\Questions;
+use App\Models\Answer;
+use App\Models\Question;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Answers>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Answer>
  */
-class AnswersFactory extends Factory
+class AnswerFactory extends Factory
 {
-    protected $model = Answers::class;
+    protected $model = Answer::class;
     /**
      * Define the model's default state.
      *
@@ -20,7 +20,7 @@ class AnswersFactory extends Factory
     public function definition(): array
     {
         return [
-            'question_id' => Questions::factory(),
+            'question_id' => Question::factory(),
             'answer' => fake()->sentence(),
             'is_correct' => fake()->boolean(),
         ];

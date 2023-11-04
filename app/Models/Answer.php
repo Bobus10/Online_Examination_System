@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Answers extends Model
+class Answer extends Model
 {
     use HasFactory;
     protected $fillable = [
@@ -13,6 +13,6 @@ class Answers extends Model
     ];
 
     public function question() {
-        return $this->belongsTo(Questions::class, 'question_id');
+        return $this->belongsTo(Question::class);
     }
 }

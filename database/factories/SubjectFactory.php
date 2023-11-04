@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Instructors;
+use App\Models\Instructor;
 use App\Models\Subject;
 use App\Models\Yearbook;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -23,7 +23,7 @@ class SubjectFactory extends Factory
         return [
             'name' => fake()->text(20),
             'yearbook_id' => Yearbook::factory(),
-            'instructor_id' => Instructors::factory(),
+            'instructor_id' => Instructor::factory(),
         ];
     }
 }

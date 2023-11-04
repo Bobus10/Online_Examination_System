@@ -2,64 +2,61 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Instructor;
 use App\Models\Subject;
 use Illuminate\Http\Request;
 
 class SubjectController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        return view("admin.subject.index", [
+            'subjects' => Subject::all(),
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view("admin.subject.create", [
+            'Instructor' => Instructor::all(),
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Subject $subject)
+    public function show($id)
+    {
+        return view("admin.subject.show", [
+            'subject' => Subject::find($id),
+        ]);
+    }
+
+    public function edit($id)
+    {
+        $subject = Subject::with('instructor')->find($id);
+        $Instructor = $subject->instructor()->get();
+
+        // dd($Instructor);
+        return view("admin.subject.edit", [
+            'subject' => $subject,
+            'Instructor' => $Instructor,
+        ]);
+    }
+
+    public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Subject $subject)
+    public function destroy($id)
     {
-        //
-    }
+        $subject = Subject::find($id);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Subject $subject)
-    {
-        //
-    }
+        $subject->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Subject $subject)
-    {
-        //
+        return redirect()->back();
     }
 }

@@ -2,12 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\Answers;
+use App\Models\Answer;
 use App\Models\Classes;
 use App\Models\DegreeCourse;
-use App\Models\Exams;
-use App\Models\Instructors;
-use App\Models\Questions;
+use App\Models\Exam;
+use App\Models\Instructor;
+use App\Models\Question;
 use App\Models\Student;
 use App\Models\Subject;
 use App\Models\Yearbook;
@@ -39,10 +39,10 @@ class DegreeCourseSeeder extends Seeder
                     ->has(Student::factory(5))
                 )
                 ->has(Subject::factory(4)
-                    ->has(Instructors::factory(1))
-                    ->has(Exams::factory(4)
-                        ->has(Questions::factory(5)
-                            ->has(Answers::factory(3))
+                    ->has(Instructor::factory(1))
+                    ->has(Exam::factory(4)
+                        ->has(Question::factory(5)
+                            ->has(Answer::factory(3))
                         )
                     )
                 )

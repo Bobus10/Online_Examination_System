@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Instructors extends Model
+class Instructor extends Model
 {
     use HasFactory;
 
@@ -18,10 +18,10 @@ class Instructors extends Model
     ];
 
     public function user() {
-        return $this->hasOne(User::class, 'user_id');
+        return $this->hasOne(User::class);
     }
 
-    public function subjects() {
-        return $this->hasMany(Subject::class);
+     public function subjects() {
+        return $this->belongsToMany(Subject::class);
     }
 }

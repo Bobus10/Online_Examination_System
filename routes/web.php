@@ -5,8 +5,9 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClassesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\YearbookController;
-use App\Http\Controllers\InstructorsController;
+use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\DegreeCourseController;
+use App\Http\Controllers\SubjectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,7 +67,18 @@ Route::middleware('auth')->group(function () {
             });
         });
         Route::prefix('/instructors')->group(function () {
-            Route::controller(InstructorsController::class)->name('instructors.')->group(function () {
+            Route::controller(InstructorController::class)->name('instructors.')->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::get('/create', 'create')->name('create');
+                Route::post('/', 'store')->name('store');
+                Route::get('/show/{id}', 'show')->name('show');
+                Route::get('/edit/{id}', 'edit')->name('edit');
+                Route::patch('/{id}', 'update')->name('update');
+                Route::delete('/{id}', 'destroy')->name('destroy');
+            });
+        });
+        Route::prefix('/subject')->group(function () {
+            Route::controller(SubjectController::class)->name('subject.')->group(function () {
                 Route::get('/', 'index')->name('index');
                 Route::get('/create', 'create')->name('create');
                 Route::post('/', 'store')->name('store');

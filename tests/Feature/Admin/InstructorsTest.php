@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Admin;
 
-use App\Models\Instructors;
+use App\Models\Instructor;
 use Tests\TestCase;
 use App\Models\User;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -23,7 +23,7 @@ class InstructorsTest extends TestCase
 
     public function test_admin_has_permissions_to_open_admin_instructors_info(): void
     {
-        $instructor = Instructors::factory()->create();
+        $instructor = Instructor::factory()->create();
         $user = User::factory()->create(['role' => 'admin']);
 
         $response = $this->actingAs($user)->get("/admin/instructors/show/{$instructor->id}");
@@ -42,7 +42,7 @@ class InstructorsTest extends TestCase
 
     public function test_admin_has_permissions_to_open_admin_instructors_edit(): void
     {
-        $instructor = Instructors::factory()->create();
+        $instructor = Instructor::factory()->create();
         $user = User::factory()->create(['role' => 'admin']);
 
         $response = $this->actingAs($user)->get("/admin/instructors/edit/{$instructor->id}");
@@ -84,7 +84,7 @@ class InstructorsTest extends TestCase
             'salary' => 5000,
         ];
 
-        $instructor = Instructors::factory()->create($dataBeforeUpdate);
+        $instructor = Instructor::factory()->create($dataBeforeUpdate);
 
         $data = [
             'user_id' => $user->id,
@@ -109,7 +109,7 @@ class InstructorsTest extends TestCase
 
     public function test_admin_can_delete_instructors(): void
     {
-        $instructor = Instructors::factory()->create();
+        $instructor = Instructor::factory()->create();
         $admin = User::factory()->create(['role' => 'admin']);
 
         $response = $this->actingAs($admin)->delete("/admin/instructors/{$instructor->id}");
