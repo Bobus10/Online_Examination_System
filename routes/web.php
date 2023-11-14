@@ -42,7 +42,7 @@ Route::middleware('auth')->group(function () {
                 Route::delete('/{id}', 'destroy')->name('destroy');
             });
 
-            Route::prefix('/yearbook')->group(function () {
+            Route::prefix('/yearbooks')->group(function () {
                 Route::controller(YearbookController::class)->name('yearbooks.')->group(function () {
                     Route::get('/{id}', 'index')->name('index');
                     Route::get('/create/{id}', 'create')->name('create');
@@ -53,8 +53,8 @@ Route::middleware('auth')->group(function () {
                     Route::delete('/{id}', 'destroy')->name('destroy');
                 });
 
-                Route::prefix('/class')->group(function () {
-                    Route::controller(ClassesController::class)->name('class.')->group(function () {
+                Route::prefix('/classes')->group(function () {
+                    Route::controller(ClassesController::class)->name('classes.')->group(function () {
                         Route::get('/{id}', 'index')->name('index');
                         Route::get('/create/{id}', 'create')->name('create');
                         Route::post('/{id}', 'store')->name('store');
@@ -77,8 +77,8 @@ Route::middleware('auth')->group(function () {
                 Route::delete('/{id}', 'destroy')->name('destroy');
             });
         });
-        Route::prefix('/subject')->group(function () {
-            Route::controller(SubjectController::class)->name('subject.')->group(function () {
+        Route::prefix('/subjects')->group(function () {
+            Route::controller(SubjectController::class)->name('subjects.')->group(function () {
                 Route::get('/', 'index')->name('index');
                 Route::get('/create', 'create')->name('create');
                 Route::post('/', 'store')->name('store');

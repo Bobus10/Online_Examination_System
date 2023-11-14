@@ -64,7 +64,7 @@ class ClassesController extends Controller
             }
         }
 
-        return redirect()->route('class.index', $yearbook->id);
+        return redirect()->route('classes.index', $yearbook->id);
     }
 
     public function show($id)
@@ -130,7 +130,7 @@ class ClassesController extends Controller
             }
         }
 
-        return redirect()->route('class.index', $yearbookId);
+        return redirect()->route('classes.index', $yearbookId);
     }
 
     public function destroy($id)

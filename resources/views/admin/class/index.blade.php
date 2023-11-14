@@ -2,7 +2,7 @@
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-5 my-5">
         <div class="text-lg">
             {{ $classes->first()->yearbook->degreeCourse->name }} {{ $classes->first()->yearbook->academic_year }}
-            <a href="{{ route('class.create', $classes->first()->yearbook->id) }}"<x-buttons.create/></a>
+            <a href="{{ route('classes.create', $classes->first()->yearbook->id) }}"<x-buttons.create/></a>
         </div>
         <table>
             <thead>
@@ -32,9 +32,9 @@
                             <th>{{ $class->students->count() }}</th>
 
                         <x-table.th class="flex items-center text-center">
-                            <a href="{{ route('class.show', $class->id) }}"><x-buttons.info/></a>
-                            <a href="{{ route('class.edit', $class->id) }}"><x-buttons.edit/></a>
-                            <form method="POST" action="{{ route('class.destroy', $class->id) }}" >
+                            <a href="{{ route('classes.show', $class->id) }}"><x-buttons.info/></a>
+                            <a href="{{ route('classes.edit', $class->id) }}"><x-buttons.edit/></a>
+                            <form method="POST" action="{{ route('classes.destroy', $class->id) }}" >
                                 @csrf
                                 @method('DELETE')
                                 <x-buttons.delete type='submit'/>

@@ -12,32 +12,39 @@ use Tests\TestCase;
 class YearbookTest extends TestCase
 {
     use RefreshDatabase;
-    /**
-     * A basic feature test example.
-     */
+
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $admin = User::factory()->create(['role' => 'admin']);
+
+        $this->actingAs($admin);
+    }
+
     public function test_admin_has_permissions_to_open_yearbook_list(): void
     {
-        $admin = User::factory()->create(['role' => 'admin']);
+
         $yearbook = Yearbook::factory()->createOne();
 
-        $response = $this->actingAs($admin)->get("/admin/degree_courses/yearbook/{$yearbook->id}");
+        $response = $this->get("/admin/degree_courses/yearbooks/{$yearbook->id}");
 
         $response->assertStatus(200);
     }
 
     public function test_admin_has_permissions_to_open_yearbook_edit(): void
     {
-        $admin = User::factory()->create(['role' => 'admin']);
+
         $yearbook = Yearbook::factory()->createOne(['id' => 2]);
 
-        $response = $this->actingAs($admin)->get("/admin/degree_courses/yearbook/edit/{$yearbook->id}");
+        $response = $this->get("/admin/degree_courses/yearbooks/edit/{$yearbook->id}");
 
         $response->assertStatus(200);
     }
 
     public function test_admin_can_update_yearbook(): void
     {
-        $admin = User::factory()->create(['role' => 'admin']);
+
         $degreeCurse = DegreeCourse::factory()->createOne([
             'id' => 1,
             'name' => 'degreeCurseTest',
@@ -55,7 +62,7 @@ class YearbookTest extends TestCase
             'academic_year' => 2019, //updated yearbook
         ];
 
-        $response = $this->actingAs($admin)->patch("/admin/degree_courses/yearbook/{$yearbook->id}", $dataToUpdate);
+        $response = $this->patch("/admin/degree_courses/yearbooks/{$yearbook->id}", $dataToUpdate);
         $response->assertStatus(302);
 
         $yearbook->refresh();
@@ -66,19 +73,19 @@ class YearbookTest extends TestCase
 
     public function test_admin_has_permission_to_open_yearbook_create(): void
     {
-        $admin = User::factory()->createOne(['role' => 'admin']);
+
         $degreeCurse = DegreeCourse::factory()->createOne([
             'id' => 1,
             'name' => 'degreeCurseTest',
         ]);
 
-        $response = $this->actingAs($admin)->get("/admin/degree_courses/yearbook/create/{$degreeCurse->id}");
+        $response = $this->get("/admin/degree_courses/yearbooks/create/{$degreeCurse->id}");
         $response->assertStatus(200);
     }
 
     public function test_admin_can_create_yearbook(): void
     {
-        $admin = User::factory()->createOne(['role' => 'admin']);
+
         $degreeCurse = DegreeCourse::factory()->createOne([
             'id' => 1,
             'name' => 'degreeCurseTest',
@@ -89,7 +96,7 @@ class YearbookTest extends TestCase
             'academic_year' => 2019,
         ];
 
-        $response = $this->actingAs($admin)->post("/admin/degree_courses/yearbook/{$degreeCurse->id}", $dataToCreate);
+        $response = $this->post("/admin/degree_courses/yearbooks/{$degreeCurse->id}", $dataToCreate);
         $response->assertStatus(302);
 
         $degreeCurse->refresh();

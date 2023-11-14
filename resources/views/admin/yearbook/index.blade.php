@@ -36,7 +36,7 @@
                             <th>{{ $yearbook->academic_year }}</th>
 
                         <x-table.th class="flex items-center text-center">
-                            <a href="{{ route('class.index', $yearbook->id) }}"><x-buttons.info/></a>
+                            <a href="{{ route('classes.index', $yearbook->id) }}"><x-buttons.info/></a>
                             <a href="{{ route('yearbooks.edit', $yearbook->id) }}"><x-buttons.edit/></a>
                             <form method="POST" action="{{ route('yearbooks.destroy', $yearbook->id) }}" >
                                 @csrf

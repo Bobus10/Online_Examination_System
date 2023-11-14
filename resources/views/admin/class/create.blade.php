@@ -6,7 +6,7 @@
             {{ $yearbook->academic_year }}
             {{ $nextLetter }}
         </div>
-        <form method="POST" action="{{ route('class.store', $yearbook->id) }}">
+        <form method="POST" action="{{ route('classes.store', $yearbook->id) }}">
             @csrf
 
             <table>

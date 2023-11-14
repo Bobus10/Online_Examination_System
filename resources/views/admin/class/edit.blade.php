@@ -6,7 +6,7 @@
             {{ $class->yearbook->academic_year }}
             {{ $class->label }}
         </div>
-        <form method="POST" action="{{ route('class.update', $class->id) }}">
+        <form method="POST" action="{{ route('classes.update', $class->id) }}">
             @csrf
             @method("PATCH")
 
